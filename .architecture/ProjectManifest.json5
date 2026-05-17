@@ -19,7 +19,7 @@
     "status": "Active — AOK installed; Wagtail scaffold pending",
     "currentVersion": "0.1.0",
     "nextVersion": "0.2.0",
-    "repositoryUrl": ""
+    "repositoryUrl": "https://github.com/jlcoronado/python.do"
   },
 
   "stack": {
