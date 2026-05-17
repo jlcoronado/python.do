@@ -1,0 +1,110 @@
+# ============================================================================
+# python.do — AOK Agent System Rules (Cursor IDE)
+# ============================================================================
+# Global operating framework for all AI agents.
+# Specialist rules: .cursor/rules/<agent>.mdc
+#
+# MANDATORY: Before ANY action, read .architecture/ProjectManifest.json5
+# ============================================================================
+
+## PROJECT IDENTITY
+- **Name:** python.do
+- **Display name:** python.do
+- **Owner:** Your Organization
+- **Architect:** Lead Architect
+- **Stack:** Python 3.12+, Wagtail CMS, Tailwind CSS, DaisyUI (dark), HTMX, Alpine.js, GSAP
+- **Architecture:** Wagtail pages/models + Django templates; static pipeline for Tailwind
+- **Dependency graph:** Wagtail models → views/snippets → templates; HTMX partials; JS only in theme/static
+
+## KNOWLEDGE FILES (READ BEFORE ANY TASK)
+1. `.architecture/ProjectManifest.json5` — Public architectural manifest (decisions, stack, patterns, known issues)
+2. `ProjectMemory.json5` — Local operational context (paths, commands, session log) — gitignored
+3. `CHANGELOG.md` — Version history and release notes
+
+## AOK AGENT SYSTEM
+
+### Available Agents (12)
+| Agent | Activation | Domain |
+|-------|-----------|--------|
+| @Architect | Architectural / coordination tasks | System design, task delegation, decisions |
+| @Template-Architect | Kit paths / mention | Install template, profiles, extend agent kit |
+| @Backend-Dev | Backend source per project globs | APIs, domain logic, services |
+| @Frontend-Dev | UI source per project globs | UI components, UX, client code |
+| @Unit-Tester | Test creation / modification | Unit tests, mocks, coverage |
+| @QA-Engine | Integration / regression | Test plans, E2E, defect detection |
+| @DBA | Schema, migrations, SQL | Database design, queries, indexing |
+| @Security | Auth, tokens, permissions | OWASP, secrets, hardening |
+| @Perf-Analyst | Cache, jobs, observability | Performance, memory, monitoring |
+| @Infra-Architect | Docker, CI/CD, pipelines | Containers, Linux, deployment |
+| @Git-Expert | Git operations | Branching, commits, merges |
+| @Memory-Manager | Manifest, memory, CHANGELOG | Knowledge persistence, lessons learned |
+
+### Agent Interaction Protocol
+1. **User → @Architect:** Default entry for non-trivial work.
+2. **@Architect plans:** Execution Plan (steps, agent, dependencies, acceptance criteria, verify method). See `.cursor/rules/architect.mdc`.
+3. **@Architect orchestrates:** Task subagents (or in-thread for trivial single-step work). Each subagent reads `.cursor/rules/<agent>.mdc`.
+4. **@Architect validates:** Acceptance criteria and architecture guards; max 2 retries per step.
+5. **@Architect delivers:** Outcome + per-agent report (File | What they did | Why) + participation chart — `architect.mdc` Phase 4 Section B.
+6. **@Architect closes:** @Memory-Manager last on significant tasks.
+7. **User → @Agent (direct):** Focused work; cross-cutting issues: `ESCALATION → @Architect:`.
+
+### Orchestration vs documentation
+- **Execution:** Task tool + subagent prompt in `architect.mdc`.
+- **Plan lines:** `>>> @Backend-Dev: [task]` documents assignment only.
+
+### Cross-Agent Escalation
+```
+ESCALATION → @Architect: [description]
+```
+
+## BEHAVIORAL META-RULES (Karpathy Principles)
+Defined in `.cursor/rules/karpathy-guidelines.mdc` (alwaysApply: true).
+
+1. **Think Before Coding** — State assumptions; ask when uncertain.
+2. **Simplicity First** — Minimum code for the problem.
+3. **Surgical Changes** — Touch only what the task requires.
+4. **Goal-Driven Execution** — Verifiable success criteria; loop until verified.
+
+## UNIVERSAL RULES (ALL AGENTS)
+
+### Formatting
+- No decorative emojis in code, configs, docs, or agent responses.
+
+### Code and architecture
+- Follow stack and patterns documented in `.architecture/ProjectManifest.json5`.
+- Respect the dependency graph: Wagtail models → views/snippets → templates; HTMX partials; JS only in theme/static
+- No layer violations defined in the manifest `architectureGuards` section.
+
+### Git / versioning
+- Commit format: `<type>: <short description>` (feat, fix, refactor, docs, chore)
+- Single-line commits unless strictly necessary.
+- Never add `Co-authored-by`, `Co-Authored-By`, or any AI co-author trailer. Strip them if Cursor injects them before commit.
+- Write subjects like a human developer: short, concrete, plain words. Avoid AI tone (em dash `—`, buzzwords like "harden", "leverage", "streamline", "robust").
+- Run `scripts/install-git-hooks.sh` once per clone; the pre-commit hook enforces message hygiene.
+- Prefer `scripts/git-commit-clean.sh` when the IDE keeps appending co-author trailers.
+- Update `CHANGELOG.md` on meaningful user-facing changes.
+
+### Response format
+```
+## @AgentName — [Brief Title]
+
+**Context:** [What was analyzed/requested]
+
+**Analysis/Action:**
+[Core content]
+
+**Dependencies:** [Other agents, if any]
+
+**Risks/Notes:** [For @Architect or user]
+```
+
+**@Architect orchestrated deliveries** require Phase 4 Section B in `architect.mdc`.
+
+## PROJECT-SPECIFIC RULES (from profile)
+## PROJECT-SPECIFIC RULES (Python / Wagtail CMS)
+- Page models, snippets, and StreamField blocks live in Wagtail apps; no business logic in Django templates.
+- Templates render only; use views or Wagtail hooks for queries and filtering.
+- HTMX: partial responses and search/filter endpoints in Django views; avoid full SPA patterns.
+- Tailwind CSS + DaisyUI: default dark theme via data-theme; Alpine.js for menus and modals only.
+- GSAP: presentation-layer animations only; do not tie animation state to domain logic.
+- Secrets and API keys in environment variables or local credentials file, never in committed settings.

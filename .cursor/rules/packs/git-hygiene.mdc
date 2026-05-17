@@ -1,0 +1,15 @@
+---
+description: "Git commit hygiene — always on. No AI trailers; human-like single-line subjects."
+globs:
+alwaysApply: true
+---
+
+# Git hygiene (always apply)
+
+- Format: `<type>: <short description>` (feat, fix, refactor, docs, chore, test).
+- One line in the subject when possible; no commit body unless strictly necessary.
+- Never add `Co-authored-by`, `Co-Authored-By`, or similar trailers. If the IDE adds them, remove before `git commit` finishes.
+- Human-like wording: say what changed in plain language. Prefer commas or "and" over em dash `—`. Avoid hype verbs (harden, leverage, streamline, robust, comprehensive).
+- After commit, verify: `git log -1 --format=%B` must not contain co-author lines.
+- Install enforcement once: `scripts/install-git-hooks.sh` (pre-commit rejects trailers and `—` in the subject).
+- Never commit `ProjectMemory.json5`, `.credentials.env`, or `.cursor-agent-backups/`.

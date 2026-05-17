@@ -1,0 +1,31 @@
+# F901 — Hotfix workflow
+name: hotfix
+description: Minimal change with test proof and memory update
+strategy: sequential
+
+steps:
+  - id: 1
+    agent: "@Backend-Dev"
+    action: "Identify root cause and minimal fix"
+    acceptance:
+      - "Root cause stated in step output"
+      - "Fix scoped to hotfix only"
+    verify: "verifyCommands.test"
+
+  - id: 2
+    agent: "@Unit-Tester"
+    depends_on: [1]
+    action: "Regression test or reproduce test"
+    acceptance:
+      - "Test fails before / passes after (or documented manual verify)"
+
+  - id: 3
+    agent: "@Git-Expert"
+    depends_on: [2]
+    optional: true
+    action: "Branch/commit per user request only"
+
+  - id: 4
+    agent: "@Memory-Manager"
+    depends_on: [2]
+    action: "Log lesson learned and branchStatus"

@@ -1,0 +1,12 @@
+---
+description: "Baseline security reminders — secrets, authz, parameterized queries. Activates on appsettings and auth-related paths."
+globs: "**/appsettings*.json, **/*Auth*.cs, **/*Security*.ts, **/.env*"
+alwaysApply: false
+---
+
+# Security baseline (optional pack)
+
+- No secrets in committed config; use environment variables or local credentials file.
+- Authorize at service layer, not UI only.
+- Parameterized queries / ORM — no string-concatenated SQL.
+- Validate and sanitize all external input.

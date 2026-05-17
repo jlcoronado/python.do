@@ -1,0 +1,28 @@
+# Cursor agent local memory (template: cursor-agents)
+ProjectMemory.json5
+.credentials.env
+.cursor-agent-backups/
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+dist/
+build/
+*.egg-info/
+
+# Django / Wagtail
+.env
+db.sqlite3
+staticfiles/
+media/
+
+# Node (frontend toolchain)
+node_modules/

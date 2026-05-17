@@ -1,0 +1,31 @@
+# F901 — Database schema change workflow
+name: schema-change
+description: Schema/migration with backend alignment and tests
+strategy: sequential
+
+steps:
+  - id: 1
+    agent: "@DBA"
+    action: "Design migration and EF configurations"
+    acceptance:
+      - "Migration script or EF migration present"
+      - "Multi-DB compatibility considered if applicable"
+
+  - id: 2
+    agent: "@Backend-Dev"
+    depends_on: [1]
+    action: "Align domain/entities and repositories"
+    acceptance:
+      - "verifyCommands.build passes"
+
+  - id: 3
+    agent: "@Unit-Tester"
+    depends_on: [2]
+    action: "Tests for persistence behavior"
+    acceptance:
+      - "verifyCommands.test passes"
+
+  - id: 4
+    agent: "@Memory-Manager"
+    depends_on: [3]
+    action: "Record schema decision in decisionsLog"

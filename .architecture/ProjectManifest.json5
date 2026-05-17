@@ -1,0 +1,110 @@
+// ============================================================================
+// ProjectManifest.json5 — python.do (Wagtail CMS)
+// ============================================================================
+{
+  "meta": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-05-17T12:00:00Z",
+    "type": "public-manifest",
+    "companionFile": "ProjectMemory.json5 (gitignored — local paths, session logs)",
+    "instructions": "Update decisionsLog on architectural decisions. Keep local paths and credentials out of this file."
+  },
+
+  "project": {
+    "name": "python.do",
+    "displayName": "python.do",
+    "owner": "Your Organization",
+    "architect": "Lead Architect",
+    "description": "Community site for Python users in the Dominican Republic: events, resources, and Wagtail-managed content with Tailwind, DaisyUI (dark default), HTMX, Alpine.js, and GSAP.",
+    "status": "Active — AOK installed; Wagtail scaffold pending",
+    "currentVersion": "0.1.0",
+    "nextVersion": "0.2.0",
+    "repositoryUrl": ""
+  },
+
+  "stack": {
+    "summary": "Python 3.12+, Wagtail CMS, Tailwind CSS, DaisyUI (dark), HTMX, Alpine.js, GSAP",
+    "languages": ["Python", "HTML", "CSS", "JavaScript"],
+    "frameworks": ["Django", "Wagtail", "Tailwind CSS", "DaisyUI", "HTMX", "Alpine.js", "GSAP"],
+    "databases": ["PostgreSQL"],
+    "tooling": ["pytest", "ruff", "npm"]
+  },
+
+  "architecture": {
+    "style": "Wagtail pages/models + Django templates; static pipeline for Tailwind",
+    "dependencyGraph": "Wagtail models → views/snippets → templates; HTMX partials; JS only in theme/static",
+    "layers": {
+      "common": "core",
+      "domain": "apps",
+      "application": "apps",
+      "infrastructure": "config",
+      "ui": "theme",
+      "host": "."
+    }
+  },
+
+  "domainBoundaries": {
+    "treeFocus": ["apps", "config", "theme", "templates", "."],
+    "excludeDirs": [
+      "node_modules",
+      "bin",
+      "obj",
+      ".git",
+      "dist",
+      "build",
+      ".cursor-agent-backups",
+      "venv",
+      ".venv"
+    ],
+    "includeExtensions": [".py", ".html", ".css", ".js", ".json", ".yaml", ".md"]
+  },
+
+  "agentActivation": {
+    "templateKit": "scripts/install.sh, scripts/restore-backup.sh, profiles/**, template/**, docs/ADOPTION.md, docs/INSTALL-OPTIONS.md",
+    "backend": "**/*.py",
+    "frontend": "**/*.{html,css,js},templates/**,theme/**,static/**",
+    "dba": "**/migrations/**, **/models.py",
+    "security": "**/settings*.py, **/.env*, **/wagtail/**",
+    "infra": "**/Dockerfile*, **/docker-compose*, **/*.yml, **/*.yaml",
+    "perf": "**/cache*.py",
+    "tests": "**/test_*.py, **/tests/**"
+  },
+
+  "architectureGuards": [
+    "Page models and StreamField blocks only in Wagtail apps",
+    "Templates must not run ORM queries or business logic",
+    "HTMX endpoints return partials; no full SPA for catalog search and filters",
+    "Default UI theme is DaisyUI dark (data-theme)",
+    "No secrets in source control — use environment variables or local credentials file"
+  ],
+
+  "decisionsLog": [
+    {
+      "date": "2026-05-17",
+      "decision": "Stack: Wagtail CMS with Tailwind, DaisyUI dark, HTMX, Alpine.js, GSAP",
+      "reason": "CMS for community content and pages; server-rendered templates with progressive enhancement",
+      "alternativesDiscarded": ["FastAPI-only API — rejected; content site needs Wagtail pages"]
+    }
+  ],
+  "pendingDecisions": [],
+  "openQuestions": [
+    "PostgreSQL hosting and environment layout for production"
+  ],
+  "observations": [],
+
+  "branchStatus": {
+    "branch": "initialization",
+    "goal": "Repository initialized; Wagtail scaffold pending",
+    "completedSteps": [
+      "AOK agents installed via python-wagtail profile",
+      "Git repository initialized with main, dev, and initialization branches"
+    ],
+    "pendingIssues": ["Initial Wagtail + Tailwind + HTMX + Alpine + GSAP scaffold"]
+  },
+
+  "verifyCommands": {
+    "build": "python manage.py check; npm run build",
+    "test": "pytest -q",
+    "lint": "ruff check ."
+  }
+}

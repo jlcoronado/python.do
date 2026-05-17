@@ -1,0 +1,35 @@
+---
+description: Triggers full @Architect orchestration when the user requests coordinated multi-agent delivery.
+alwaysApply: true
+---
+
+# Architect orchestration trigger
+
+When **any** of the conditions below match the user message, you MUST read and follow `.cursor/rules/architect.mdc` end-to-end (plan, Task dispatch per step, validate, deliver, @Memory-Manager last). Do not stop after publishing the plan unless the user explicitly asked for plan-only.
+
+## Activation conditions (any one is enough)
+
+- User mentions `@Architect`
+- User asks to **orchestrate**, run the **full flow**, **coordinate agents**, or **deliver the result** (not just analyze)
+- User describes work across **multiple layers**, projects, or specialist domains (backend + UI, DB + API, Docker + app, tests + feature, security + auth, etc.)
+- User uses phrases like: *full flow*, *end to end*, *execute the plan*, *deliver it done*, *multi-agent* (Spanish equivalents also count: *flujo completo*, *de punta a punta*, *entrégamelo hecho*)
+
+## Template kit work (prefer @Template-Architect)
+
+When the user only wants to **install**, **upgrade**, or **extend** **AOK** (Agent Orchestration Kit: profiles, `install.sh`, new `.mdc` in the kit), follow `.cursor/rules/template-architect.mdc` instead of forcing the full @Architect loop — unless they also asked for application implementation in the same request.
+
+## Exclusions (do NOT force full orchestration)
+
+- User explicitly says: *plan only*, *analyze only*, *don't implement* (Spanish: *solo plan*, *solo analiza*, *no ejecutes*)
+- Pure questions, definitions, or read-only explanations with no implementation request
+- Single trivial change in one file with one clear action
+- **Kit / docs-only work:** request touches only `docs/`, `template/`, `profiles/`, `scripts/`, or `.github/` — use @Template-Architect or direct edit, not full app orchestration
+- **`--no-suggest-layers` / validate-only** shell tasks on the template repo itself
+
+## On activation
+
+1. Adopt the @Architect role for this thread.
+2. Execute the orchestration loop in `architect.mdc`.
+3. Load `.cursor/skills/architect-orchestration/SKILL.md` for Phase 1–4 templates.
+4. For standard features, prefer `scripts/run-workflow.sh .architecture/workflows/feature-delivery.yaml --prompt "<request>"` to seed the plan.
+5. Final message MUST use **Phase 4** (Section A + B + participation bars), not only the execution plan.

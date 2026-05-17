@@ -1,0 +1,26 @@
+#!/bin/sh
+# Reject commit messages with AI co-author trailers or common AI punctuation in the subject.
+set -e
+
+msg_file="$1"
+if [ -z "$msg_file" ]; then
+  msg_file="$(git rev-parse --git-path COMMIT_EDITMSG)"
+fi
+
+if [ ! -f "$msg_file" ]; then
+  exit 0
+fi
+
+if grep -qiE '^[[:space:]]*co-authored-by:' "$msg_file"; then
+  echo "pre-commit: remove Co-authored-by / Co-Authored-By lines from the commit message." >&2
+  echo "pre-commit: only the human author belongs in history (see .cursorrules and git-expert.mdc)." >&2
+  exit 1
+fi
+
+subject=$(sed -n '1p' "$msg_file" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+if printf '%s' "$subject" | grep -q '—'; then
+  echo "pre-commit: avoid em dash (—) in the commit subject; use a comma or short plain wording." >&2
+  exit 1
+fi
+
+exit 0

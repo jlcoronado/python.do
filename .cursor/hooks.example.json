@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "command": "./scripts/validate-rules.sh .",
+        "comment": "Optional: validate rules after editing .mdc (disable if noisy)"
+      }
+    ]
+  }
+}

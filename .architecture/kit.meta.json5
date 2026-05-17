@@ -1,0 +1,28 @@
+// Kit metadata — copied to target on install (AOK 1.x)
+{
+  kitProductName: "Agent Orchestration Kit",
+  kitAbbrev: "AOK",
+  kitVersion: "1.1.0",
+  capabilities: [
+    "orchestration-12-agents",
+    "workflow-yaml",
+    "run-workflow-prompt",
+    "architect-slim-skill-split",
+    "kit-health-dashboard",
+    "bootstrap-one-command",
+    "domain-boundaries",
+    "validate-agents-golden",
+    "profiles-minimal-dotnet-node-python",
+    "skills-parallel-grind-ci",
+    "rules-render-optional",
+    "git-commit-hygiene-hooks",
+    "git-commit-clean-helper",
+    "ci-validate-kit",
+  ],
+  scripts: {
+    install: "scripts/install.sh",
+    bootstrap: "scripts/bootstrap-project.sh",
+    health: "scripts/kit-health.sh",
+    runWorkflow: "scripts/run-workflow.sh",
+  },
+}
