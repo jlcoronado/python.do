@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+<section class="hero min-h-[70vh] bg-base-300" id="hero">
+    <div class="hero-content text-center">
+        <div class="max-w-2xl">
+            <h1 class="text-5xl font-bold hero-title">{{ page.title }}</h1>
+            {% if page.tagline %}
+            <p class="py-6 text-lg hero-tagline">{{ page.tagline }}</p>
+            {% endif %}
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="{% url 'search' %}" class="btn btn-primary">Explorar contenido</a>
+                <a href="/admin/" class="btn btn-outline">Administrar</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if page.intro %}
+<section class="container mx-auto px-4 py-16 max-w-3xl prose prose-invert">
+    {{ page.intro|richtext }}
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof gsap === "undefined") return;
+    gsap.from(".hero-title", { opacity: 0, y: 40, duration: 0.8, ease: "power2.out" });
+    gsap.from(".hero-tagline", { opacity: 0, y: 24, duration: 0.8, delay: 0.15, ease: "power2.out" });
+    gsap.from("#hero .btn", { opacity: 0, y: 16, duration: 0.6, delay: 0.35, stagger: 0.1, ease: "power2.out" });
+});
+</script>
+{% endblock %}

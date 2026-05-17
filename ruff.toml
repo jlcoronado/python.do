@@ -1,0 +1,14 @@
+target-version = "py312"
+line-length = 100
+src = ["apps", "config", "tests"]
+
+[lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[lint.per-file-ignores]
+"apps/home/migrations/*" = ["E501"]
+"apps/*/migrations/*" = ["E501"]
+"config/settings/dev.py" = ["F403", "F405"]
+"config/settings/production.py" = ["F403", "F405"]
+"config/settings/test.py" = ["F403", "F405"]

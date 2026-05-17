@@ -1,0 +1,46 @@
+{% load wagtailcore_tags %}
+
+{% if search_results %}
+<ul class="space-y-4">
+    {% for result in search_results %}
+    <li class="card bg-base-200 shadow-sm">
+        <div class="card-body py-4">
+            <h2 class="card-title text-lg">
+                <a href="{% pageurl result %}" class="link link-hover">{{ result }}</a>
+            </h2>
+            {% if result.search_description %}
+            <p class="text-base-content/70 text-sm">{{ result.search_description }}</p>
+            {% endif %}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+{% if search_results.has_previous or search_results.has_next %}
+<nav class="flex gap-4 mt-6" aria-label="Paginación">
+    {% if search_results.has_previous %}
+    <a
+        class="btn btn-sm btn-ghost"
+        href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}"
+        hx-get="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}"
+        hx-target="#search-results"
+        hx-push-url="true"
+    >Anterior</a>
+    {% endif %}
+    {% if search_results.has_next %}
+    <a
+        class="btn btn-sm btn-ghost"
+        href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}"
+        hx-get="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}"
+        hx-target="#search-results"
+        hx-push-url="true"
+    >Siguiente</a>
+    {% endif %}
+</nav>
+{% endif %}
+
+{% elif search_query %}
+<p class="text-base-content/70">No se encontraron resultados.</p>
+{% else %}
+<p class="text-base-content/70">Escribe para buscar páginas y contenido de la comunidad.</p>
+{% endif %}

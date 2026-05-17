@@ -22,6 +22,7 @@ build/
 .env
 db.sqlite3
 staticfiles/
+/static/
 media/
 
 # Node (frontend toolchain)

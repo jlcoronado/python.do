@@ -1,27 +1,17 @@
 # python.do — next steps
 
-AOK agents are installed. Open this folder as the Cursor workspace root (not the AOK kit repo).
+Wagtail scaffold is in place on branch `initialization`.
 
-## Scaffold the application
+## Suggested follow-ups
 
-In Cursor chat:
-
-```
-@Architect — Run workflow feature-delivery end to end.
-
-Request: Scaffold Wagtail project for python.do: Tailwind CSS + DaisyUI dark default, HTMX search/filter for books and documents, Alpine.js menus and modals, GSAP hero animations.
-```
-
-Or from the terminal:
-
-```bash
-./scripts/run-workflow.sh .architecture/workflows/feature-delivery.yaml \
-  --prompt "Scaffold Wagtail project: Tailwind+DaisyUI dark default, HTMX search/filter, Alpine menus, GSAP hero"
-```
+1. Merge `initialization` → `dev` when you are happy with the bootstrap.
+2. Create content types (events, resources) as Wagtail page models in `apps/`.
+3. Configure production hosting (DNS, PostgreSQL, `DJANGO_SECRET_KEY`, `ALLOWED_HOSTS`).
+4. Add CI (GitHub Actions): `ruff`, `pytest`, `npm run build`.
 
 ## Kit upgrades
 
-Re-install agents from the kit (preserves this manifest unless you pass `--force`):
+Re-install agents from the kit (preserves manifest unless `--force`):
 
 ```bash
 /home/coronado/Proyectos/AOK/scripts/install.sh /home/coronado/Proyectos/python.do \

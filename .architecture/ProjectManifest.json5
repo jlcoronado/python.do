@@ -16,7 +16,7 @@
     "owner": "Your Organization",
     "architect": "Lead Architect",
     "description": "Community site for Python users in the Dominican Republic: events, resources, and Wagtail-managed content with Tailwind, DaisyUI (dark default), HTMX, Alpine.js, and GSAP.",
-    "status": "Active — AOK installed; Wagtail scaffold pending",
+    "status": "Active — Wagtail scaffold on initialization branch",
     "currentVersion": "0.1.0",
     "nextVersion": "0.2.0",
     "repositoryUrl": "https://github.com/jlcoronado/python.do"
@@ -94,12 +94,13 @@
 
   "branchStatus": {
     "branch": "initialization",
-    "goal": "Repository initialized; Wagtail scaffold pending",
+    "goal": "Wagtail scaffold complete; ready for content models and merge to dev",
     "completedSteps": [
       "AOK agents installed via python-wagtail profile",
-      "Git repository initialized with main, dev, and initialization branches"
+      "Git repository initialized with main, dev, and initialization branches",
+      "Wagtail + Tailwind/DaisyUI + HTMX search + Alpine nav + GSAP hero"
     ],
-    "pendingIssues": ["Initial Wagtail + Tailwind + HTMX + Alpine + GSAP scaffold"]
+    "pendingIssues": ["Production hosting", "CI pipeline", "Community page types (events, resources)"]
   },
 
   "verifyCommands": {

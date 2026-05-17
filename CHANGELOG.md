@@ -9,4 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Wagtail 6 project: `config/`, `apps/home`, `apps/search`, `theme/` with Tailwind and DaisyUI (dark)
+- HTMX live search on `/search/`, Alpine.js mobile menu, GSAP hero on homepage
+- Docker Compose for PostgreSQL, pytest smoke tests, `.env.example`
 - AOK agent kit and project manifest for python.do (Python community site, RD)

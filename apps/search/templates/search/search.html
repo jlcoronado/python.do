@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block body_class %}template-search{% endblock %}
+
+{% block title %}Buscar{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-4 py-12 max-w-3xl">
+    <h1 class="text-3xl font-bold mb-6">Buscar en la comunidad</h1>
+
+    <form
+        action="{% url 'search' %}"
+        method="get"
+        class="flex gap-2 mb-8"
+        hx-get="{% url 'search' %}"
+        hx-target="#search-results"
+        hx-trigger="keyup changed delay:300ms from:#search-query, submit"
+        hx-push-url="true"
+    >
+        <input
+            id="search-query"
+            type="search"
+            name="query"
+            value="{{ search_query|default:'' }}"
+            placeholder="Eventos, recursos, páginas..."
+            class="input input-bordered flex-1"
+            autocomplete="off"
+        />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    <div id="search-results">
+        {% include "search/partials/results.html" %}
+    </div>
+</section>
+{% endblock %}
