@@ -4,7 +4,7 @@ Sitio y comunidad de usuarios de Python en República Dominicana.
 
 ## Stack
 
-- Python 3.12+, Django 5.1, Wagtail 6.4
+- Python 3.12+, Django 5.2, Wagtail 7.4 (LTS)
 - PostgreSQL (desarrollo con Docker)
 - Tailwind CSS 3, DaisyUI (tema oscuro por defecto)
 - HTMX, Alpine.js, GSAP (presentación)

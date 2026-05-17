@@ -4,7 +4,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "lastUpdated": "2026-05-17T12:00:00Z",
+    "lastUpdated": "2026-05-17T16:00:00Z",
     "type": "public-manifest",
     "companionFile": "ProjectMemory.json5 (gitignored — local paths, session logs)",
     "instructions": "Update decisionsLog on architectural decisions. Keep local paths and credentials out of this file."
@@ -16,14 +16,14 @@
     "owner": "Your Organization",
     "architect": "Lead Architect",
     "description": "Community site for Python users in the Dominican Republic: events, resources, and Wagtail-managed content with Tailwind, DaisyUI (dark default), HTMX, Alpine.js, and GSAP.",
-    "status": "Active — Wagtail scaffold on initialization branch",
-    "currentVersion": "0.1.0",
-    "nextVersion": "0.2.0",
+    "status": "Active — Wagtail 7.4 LTS on initialization branch",
+    "currentVersion": "0.2.0",
+    "nextVersion": "0.3.0",
     "repositoryUrl": "https://github.com/jlcoronado/python.do"
   },
 
   "stack": {
-    "summary": "Python 3.12+, Wagtail CMS, Tailwind CSS, DaisyUI (dark), HTMX, Alpine.js, GSAP",
+    "summary": "Python 3.12+, Wagtail 7.4 LTS, Django 5.2, Tailwind CSS, DaisyUI (dark), HTMX, Alpine.js, GSAP",
     "languages": ["Python", "HTML", "CSS", "JavaScript"],
     "frameworks": ["Django", "Wagtail", "Tailwind CSS", "DaisyUI", "HTMX", "Alpine.js", "GSAP"],
     "databases": ["PostgreSQL"],
@@ -81,6 +81,12 @@
   "decisionsLog": [
     {
       "date": "2026-05-17",
+      "decision": "Upgrade Wagtail 6.4 to 7.4 LTS with Django 5.2",
+      "reason": "Admin upgrade notice; 7.4 is current LTS with security support",
+      "alternativesDiscarded": ["Stay on 6.4 — rejected; missing LTS fixes and Django 5.2 alignment"]
+    },
+    {
+      "date": "2026-05-17",
       "decision": "Stack: Wagtail CMS with Tailwind, DaisyUI dark, HTMX, Alpine.js, GSAP",
       "reason": "CMS for community content and pages; server-rendered templates with progressive enhancement",
       "alternativesDiscarded": ["FastAPI-only API — rejected; content site needs Wagtail pages"]
@@ -98,7 +104,8 @@
     "completedSteps": [
       "AOK agents installed via python-wagtail profile",
       "Git repository initialized with main, dev, and initialization branches",
-      "Wagtail + Tailwind/DaisyUI + HTMX search + Alpine nav + GSAP hero"
+      "Wagtail + Tailwind/DaisyUI + HTMX search + Alpine nav + GSAP hero",
+      "Upgraded to Wagtail 7.4 LTS and Django 5.2"
     ],
     "pendingIssues": ["Production hosting", "CI pipeline", "Community page types (events, resources)"]
   },

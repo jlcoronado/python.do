@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade to Wagtail 7.4 LTS and Django 5.2.14
+
 ### Added
 
 - Wagtail 6 project: `config/`, `apps/home`, `apps/search`, `theme/` with Tailwind and DaisyUI (dark)

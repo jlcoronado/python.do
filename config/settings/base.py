@@ -133,3 +133,6 @@ WAGTAILDOCS_EXTENSIONS = [
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Django 5.x + Wagtail 7: silence URLField assume_scheme warnings
+FORMS_URLFIELD_ASSUME_HTTPS = True
