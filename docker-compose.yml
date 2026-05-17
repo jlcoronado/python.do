@@ -6,7 +6,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-python_do}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-python_do}
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      # Host 5433 avoids conflict with a local PostgreSQL on 5432
+      - "${POSTGRES_PORT:-5433}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
